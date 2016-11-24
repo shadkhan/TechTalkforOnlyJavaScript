@@ -1,0 +1,23 @@
+.reveal ul {
+    list-style-type: none;
+}
+.reveal ul ul {
+    list-style-type: none;
+}
+
+/* LIST #5 */
+
+.reveal ul li ul { list-style-image: url("images/nested.png"); padding:5px 0 5px 18px; font-size: .8em; }
+.reveal ul li ul li { color:blue; margin-left:10px; }
+
+
+
+.reveal ul { list-style-image: url("images/arrow.png"); color:dark-green; font-size:1.2em; }
+.reveal ul li { line-height:40px; }
+
+.reveal pre .code-long {
+    padding: 5px;
+    overflow: auto;
+    max-height: 783px;
+    word-wrap: normal;
+}

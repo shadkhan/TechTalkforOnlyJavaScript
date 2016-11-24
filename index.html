@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScrpt Tech Talk</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/jan.css" id="theme">
+    <link rel="stylesheet" href="css/my_styles.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="codemirror/theme/eclipse.css">
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+    document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+      <script type="text/ng-template" charset="utf-8" id="liveExample.html">
+     <div class="playground"></div>
+      <textarea class="source"></textarea>
+
+      <button class="reload" ng-click="run()">Run</button>
+
+      <select ng-model="snippet" ng-options="s.code as s.title for s in snippets" ng-change="loadSnippet(snippet)">
+
+        </script>
+  	  
+     
+      <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides"> 
+          <section data-background="img/bg.png" data-background-size="85%">
+            <img src="img/ng-causeway-logo.png" style="width:300px;height:300px"/>
+            <h1>JavaScript</h1>
+            <h3>Scalable, Maintainable, Defined</h3>
+          </section>
+          <section data-background="img/bgslide.png" data-background-size="95%">
+            
+            <h2>Overview</h2>
+            <ul>
+			
+<li>JavaScript without Frameworks.</li>
+<li class="fragment">Design pattern 
+  <ul><li class="fragment">Module Pattern
+  <ul> <li class="fragment"> Closure Pattern</li></ul>
+</li></ul> 
+ </li>
+
+<li class="fragment">Object Oriented or Pure Functional</li> 
+<li class="fragment">ES6 (ES2015) Sneak Preview and impacts </li>
+<li class="fragment">Debugging and Performance</li>
+<li class="fragment">Future of JavaScript and few thought to make Causeway products future</li>
+<li class="fragment">Questions and Comments</li>
+</ul>
+
+		               
+          </section>
+          
+         <section>
+          <p>Rush of Libraries and Frameworks</p>
+			<img src="img/jsframeworks.png" alt="JS">
+             <p><a target="_blank" href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f#.2iamewvk3">Learning JS in 2016</a></p>
+            </section>
+			
+            <section>
+              <h2>Chaos of Frameworks</h2>
+              <ul>
+                <li>Do we really need so many frameworks and libs</li>
+                <li class="fragment">Is JavaScript complete without JS frameworks, What is cost of not using these framework</li>
+                <li class="fragment">What is the future of so and so MVC framework</li>
+                <li class="fragment">Choosing the complexity over performance</li>
+              </ul>
+            </section>
+            <section>
+              <h2>Design Pattern</h2>
+              <p>
+
+                Architechting your app by choosing best of design pattern. 
+                </p>
+              
+                    <div style="float:left">
+              <ul>
+                
+              <li>  Constructor Pattern</li>
+              <li>  Module Pattern</li>
+              <li>  Revealing Module Pattern</li>
+              <li>      Singleton Pattern</li>
+              <li>      Observer Pattern</li>
+              <li>      Mediator Pattern</li>
+              <li>      Prototype Pattern</li>
+            </ul>
+            </div>
+            <div><ul>
+              <li>      Command Pattern</li>
+              <li>      Facade Pattern</li>
+              <li>      Factory Pattern</li>
+              <li>      Mixin Pattern</li>
+              <li>      Decorator Pattern</li>
+              <li>      Flyweight Pattern </li>
+
+
+</ul>
+<p style="clear:left">Source : <a target="_blank" href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/">Addy Osmani</a> </p>
+</div>
+
+
+              
+            </section>
+
+
+
+<section>
+<div style="float:left; width:400px">
+  <ul>
+  <li>JavaScript MV* Patterns
+<ul><li>MVC Pattern</li>
+<li>MVP Pattern</li>
+<li>MVVM Pattern</li>
+</ul>
+</li>
+
+<li> Modern Modular JavaScript Design Patterns
+<ul> <li>AMD</li>
+<li>CommonJS</li>
+<li>ES Harmony</li>
+ </ul>
+</li>
+
+<li> Plugin Design Patterns</li>
+<li> JavaScript Namespacing Patterns
+
+</ul>
+</div>
+<div style="float: right; width:400px;">
+  <ul>
+ <li>Design Patterns In jQuery
+  <ul>
+  <li>Composite Pattern</li>
+<li>Adapter Pattern</li>
+<li>Facade Pattern</li>
+<li>Observer Pattern</li>
+<li>Iterator Pattern</li>
+<li>Lazy Initialization Pattern</li>
+<li>Proxy Pattern</li>
+<li>Builder Pattern</li>
+</ul>
+</li>
+</li>
+</ul>
+</div>
+</section>
+
+
+
+
+          </section>
+        
+          <section data-background="img/bgslide.png" data-background-size="95%">
+            <section>
+            <h2>Module Pattern </h2>			
+            <ul>
+              
+              <li>
+                Advantages
+                <ul>
+                  <li class="fragment">Encapsulation - Private, Public, </li>
+                  <li class="fragment">Faster Namespace resolution. 
+				  <li class="fragment">Avoid collision of the methods/variables with other global APIs </li>
+				  
+          <li class="fragment">Code augmentation in multiple files</li>
+          <li class="fragment">Asynchronus code load on demand - AMD </li>
+                </ul>
+              </li>
+               </ul>
+          </section>
+
+          <section>
+             <h2>Closure in short example</h2>
+                <live-example>
+            <script type="text/template" data-title="Closure">
+           <p>Counting with a local variable.</p>
+
+            <button type="button" onclick="myFunction()">Count!</button>
+
+            <p id="demo">0</p>
+            <code>
+             /*function add2() {
+                    var counter = 0;
+                    counter += 1;
+                  return counter;
+              }*/
+            var add = (function () {
+                var counter = 0;
+                return function () {return counter += 1;}
+            })();
+
+            function myFunction(){
+                document.getElementById("demo").innerHTML = add();
+            }
+            </code>
+</script>
+
+ </live-example>
+
+          </section>
+           <section>
+              <h2>Closure in short example</h2>
+                <pre><code contenteditable class="javascript code-long">var counter = (function() {
+                            var privateCounter = 0;
+                            function changeBy(val) {
+                              privateCounter += val;
+                            }
+                            return {
+                              increment: function() {
+                                changeBy(1);
+                              },
+                              decrement: function() {
+                                changeBy(-1);
+                              },
+                              value: function() {
+                                return privateCounter;
+                              }
+                            };   
+                })();
+
+console.log(counter.value()); // logs 0
+counter.increment();
+counter.increment();
+console.log(counter.value()); // logs 2
+counter.decrement();
+console.log(counter.value()); // logs 1</code></pre>
+</section>
+
+        <section>
+              <h2>Anonymous Closures</h2>
+    <pre><code contenteditable class="javascript">// IIFE - imidiate invoking function expression   
+(function () {
+  // ... all vars and functions are in this scope only
+  // still maintains access to all globals
+}());
+
+      </code></pre>
+
+      <ul> <li>Notice the () around the anonymous function. </li><li class="fragment">
+        This is required by the language, since statements that begin with the token function are always considered to be function declarations.</li> <li class="fragment">Including () creates a function expression instead.</li>
+      </ul>
+
+            </section>
+           
+           <section>
+ <h2>Global Import</h2>
+ <aside class="notes">
+
+ <p>
+JavaScript has a feature known as implied globals. Creating global variables in an anonymous closure is easy. Unfortunately, this leads to hard-to-manage code, as it’s not obvious (to humans) which variables are global in a given file.
+
+Luckily, our anonymous function provides an easy alternative. By passing globals as parameters to our anonymous function, we import them into our code, which is both clearer and faster than implied globals. Here’s an example:
+</p>
+</aside>
+    <pre><code contenteditable class="javascript">
+(function ($, CSLib) {
+  // now have access to globals jQuery (as $) and CSLib  in this code
+}(jQuery, CSLib));
+
+// you can write any plugin or jquery plugin in this way.
+(function($) {
+    // jQuery plugin code here
+})(jQuery);
+      </code></pre>
+           </section>
+           
+
+<section>
+ <h2>Module Export</h2>
+ <p>Sometimes you don’t just want to use globals, but you want to declare them. We can easily do this by exporting them, using the anonymous function’s return value. Doing so will complete the basic module pattern, so here’s a complete example:
+</p>
+    <pre><code contenteditable class="javascript">
+
+var MODULE = (function () {
+  var my = {},
+    privateVariable = 1;
+
+  function privateMethod() {
+    // ...
+  }
+
+  my.moduleProperty = 1;
+  my.moduleMethod = function () {
+    // ...
+  };
+
+  return my;
+}());
+     </code></pre>
+ </section>
+           
+ <section> <h2>Advanced Patterns    </h2>
+    <h3>Augmentation</h3>
+   <p> Problems when splitting code in multiple files</p>
+    <aside class="notes"
+    <p>One limitation of the module pattern so far is that the entire module must be in one file. Anyone who has worked in a large code-base understands the value of splitting among multiple files. Luckily, we have a nice solution to augment modules.</p>
+  </aside>
+    <pre><code contenteditable class="javascript">
+
+var MODULE = (function (my) {
+  my.anotherMethod = function () {
+    // added method...
+  };
+
+  return my;
+}(MODULE));
+      </code></pre>
+      <p>Our module will have gained a new public method named MODULE.anotherMethod. This augmentation file will also maintain its own private internal state and imports.</p>
+           </section>
+           
+           <section>
+ <h2>Loose Augmentation</h2>
+ <p>Flexible Multipart Module </p>
+ <aside class="notes">
+ <p>While our example above requires our initial module creation to be first, and the augmentation to happen second, that isn’t always necessary. One of the best things a JavaScript application can do for performance is to load scripts asynchronously. We can create flexible multi-part modules that can load themselves in any order with loose augmentation. Each file should have the following structure:</p></aside>
+    <pre><code contenteditable class="javascript">
+
+var MODULE = (function (my) {
+  // add capabilities...
+
+  return my;
+}(MODULE || {}));
+      </code></pre>
+
+      <p>In this pattern, the var statement is always necessary. Note that the import will create the module if it does not already exist.</p>
+           </section>
+           
+           <section>
+ <h2>Tight Augmentation</h2>
+    <pre><code contenteditable class="javascript">
+
+var MODULE = (function (my) {
+  var old_moduleMethod = my.moduleMethod;
+
+  my.moduleMethod = function () {
+    // method override, has access to old through old_moduleMethod...
+  };
+
+  return my;
+}(MODULE));
+      </code></pre>
+           </section>
+           
+
+           <section>
+            <h2>Modules in multiple files</h2>
+            <pre><code contenteditable class="javascript">//File: calc.js
+var CalcModule = (function($, pub){   //jQuery will still be available via $
+                        var mem = new Array(); //private variable
+                        pub.storeInMemory = function(val){
+                                                mem.push(val);
+                                            };
+                        pub.retrieveFromMemory = function(){
+                                     return mem.pop();
+                       };
+                       return pub;
+})(jQuery, CalcModule || {});</code></pre>
+  <pre><code contenteditable class="javascript">//File: calc_functions.js
+var CalcModule = (function($, pub){
+                       pub.add = function(a,b){ 
+                                     var result = a + b;
+                                     pub.storeInMemory(result);
+                                     return result;
+                                  };
+                       
+                       pub.sub = function(a,b){
+                                     var result = a - b;
+                                     pub.storeInMemory(result);
+                                     return result;
+                                  };
+                       return pub;
+}(jQuery, CalcModule || {}));</code></pre>
+          </section>
+
+           <section>
+ <h2>Revealing Module Pattern</h2>
+    <pre><code contenteditable class="javascript code-long"> var CalcModule = (function(){
+      var mem = new Array(); //private variable
+      var storeInMemory = function(val) {  //private function
+        mem.push(val);
+      };
+      var add = function(a, b) { 
+            var result = a + b;
+            storeInMemory(result); //call to private function
+            return result;
+          };
+      var sub = function(a, b) {
+            var result = a - b;
+            storeInMemory(result); //call to private function
+            return result;
+          };
+      var retrieveFromMemory = function() {
+            return mem.pop();
+          };
+      return {
+        add: add,
+        sub: sub,
+        popMemory: retrieveFromMemory
+      };
+})(); </code></pre>
+           </section>
+
+
+
+           <section>
+ <h2>Causeway Component </h2>
+     <pre><code contenteditable class="javascript code-long">(function($) {
+  $.CSCom_Nav = function(options) {
+    if ( typeof(options) == "undefined" || options == null ) { options = {}; };
+    var cS = {
+      options: $.extend({
+          menu: '#menu',
+          panel: 'body',
+          trigger: '.menu-trigger',
+          closeOnContentClick: true,
+          duration: 150,
+          easing: 'ease-in-out',
+          before: function(){ },
+          after: function(){ }
+        },options),
+      init :    function() { ....},
+      openMenu: function() {....},
+      menu:     '#CSCom_Nav-menu',
+      panel:    '.CSCom_Nav-panel',
+      setStyle: function( ) { … }
+      };
+
+      return {
+          on: cS.init,
+          trigger: cS.triggerMenu,
+          open: cS.openMenu,
+          close: cS.closeMenu,
+          someComplexMethod: function( ) { … }
+      };
+    };
+})(jQuery);</code></pre></section>
+<section>
+<h2>Uses in project</h2> <pre><code contenteditable class="javascript">
+var sideNav = $.CSCom_Nav({
+    menu: '#sidenav',
+    trigger: '.menu-trigger',
+    duration: 300
+    …
+});
+sideNav.on( );
+</code></pre>
+           </section>
+   
+           
+<section>
+  <h2>Advantages of Revealing Module pattern</h2>
+  <ul>
+    <li>Consistent coding style inside the module for both private and public members.</li>
+<li>Better control on the name of the public API </li>
+<li>Extending the modules are easy by overwriting method</li>
+<li>Control on what to make public, just adding/removing the properties in return statement is sufficient.
+</li>
+<li>As always, cleaner code.</li>
+
+</ul>
+
+
+
+</section>
+   
+           
+
+          </section>
+<!-- End of Module Pattern -->
+
+          <section data-background="img/bgslide.png" data-background-size="95%">
+            <section>
+              <h2>Object Oriented JavaScript Vs. Pure Functional</h2>
+              <ul>
+                <li>Object oriented and inheritance in JavaScript</li>
+                <li>Classes, Protypes, Polymorphism etc..</li>
+                <li >Pros n Cons</li>
+               
+              </ul>
+
+                </li>
+                
+              </ul>
+            </section>
+
+
+          <section>
+              <h2>ExtJS Class example</h2>
+    <pre><code contenteditable class="javascript">Ext.define('Person', 
+    {
+    name : 'ABCD',
+ 
+    constructor : function(name){
+        if(name){
+            this.name = name;
+        }
+    },
+ 
+    getName : function(){
+        alert("My name is " + this.name);
+    }
+});</code></pre>
+            </section>
+
+<section>
+              <h2>ExtJS Class Inheritance</h2>
+    <pre><code contenteditable class="javascript code-long">Ext.define('Student', 
+    {
+    extend : 'Person',
+    schoolName : 'ABCD',
+ 
+    constructor : function(name, schoolName){
+        this.schoolName = schoolName || 'ABCD';
+        
+        //call parent class constructor
+        this.callParent(arguments);
+    },
+ 
+    getSchoolName : function(){
+        alert("My school name is " + this.schoolName);
+    }
+});
+
+var newStudent = new Student('XYZ', 'ABC School');
+newStudent.getName(); //output: XYZ
+newStudent.getSchoolName(); //output: ABC School
+</code></pre>
+            </section>
+
+<section> 
+  <h2>Login App</h2>
+  <pre><code contenteditable class="javascript code-long">
+Ext.define('TutorialApp.view.login.Login', {
+    extend: 'Ext.window.Window',
+    xtype: 'login',
+    requires: [
+        'TutorialApp.view.login.LoginController',
+        'Ext.form.Panel'
+    ],
+
+    controller: 'login',
+    bodyPadding: 10,
+    title: 'Login Window',
+    closable: false,
+    autoShow: true
+});
+</code></pre>
+            </section>
+
+<section><h2>Pros n Cons</h2>
+
+              <p style="float:left; width:400px;"> "The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. You wanted a banana but what you got was a gorilla holding the banana... and the entire jungle". by Joe Armstrong, creator of Erlang</p>
+
+                  <p class="fragment" style="float:left">  <img src="img/gorilla_holding_banana.jpg" alt="JS"></p>
+             </section>
+             <section><h2>Pros n Cons</h2>
+
+              <p >There are some use cases where we need to use Object Oriented style for e.g Libraries , Framework</p>
+              <p >Product development will bring constraint in OO style due to tight coupling of Components</p>
+              <p  class="fragment">MVC is not completely suitable for client side architecture , Unidirectional method is prefered</p>
+              <p  class="fragment">Global mutation, changes environment , create side effects</p>
+              <p  class="fragment">Testing is difficult for interconnected Objects</p>
+              <p  class="fragment"> Lets explore Pure functional ways...</p>
+
+
+</section>
+
+<section>
+   <h2>Pure Functions</h2>   <ul>
+
+                  <li> No Side effects</li>
+                <li> Immutability</li>
+                <li>Parallel Code</li>
+                <li> Simpler Testing</li>
+                <li> Self Documenting</li>
+                <li> Avoid Globals in Functions</li>
+              </ul>
+            
+<p>Pure functions take some input and return some output based on that input. They are the simplest reusable building blocks of code in a program. Perhaps the most important design principle in computer science is KISS (Keep It Simple, Stupid).</p>
+              </section>
+
+<section> <h2>Pure and Impure</h2>  <pre><code contenteditable class="javascript">// impure
+var minimum = 21;
+
+var checkAge = function(age) {
+  return age >= minimum;
+};
+
+// pure
+var checkAge = function(age) {
+  var minimum = 21;
+  return age >= minimum;
+};
+</code></pre>
+
+<p> Pure functions are completely independent of outside state, and as such, they are immune to entire classes of bugs that have to do with shared mutable state.</p>
+</section>
+
+<section><h2>Immutability</h2>
+  <p>JavaScript arguments are passed by reference, which means that if a function were to mutate a property on an object or array parameter that would mutate state that is accessible outside the function. Pure functions must not mutate external state.</p>
+</section>
+
+<section><h2>Parallel Code</h2>
+<p>Finally, we can run any pure function in parallel since it does not need access to shared memory and it cannot, by definition, have a race condition due to some side effect.</p>
+<p>This is very much possible in a server side js environment with threads as well as in the browser with web workers though current culture seems to avoid it due to complexity when dealing with impure functions</p>
+</section>
+
+
+
+
+<section>
+              <h2>Impure Function Impact</h2>
+    <pre><code contenteditable class="javascript">// Impure function
+            function mouseOnLeftSide(mouseX) { 
+               return mouseX < window.innerWidth / 2; 
+            } 
+
+            document.onmousemove = function(e) { 
+               console.log(mouseOnLeftSide(e.pageX)); 
+            };
+//Pure Function
+            function mouseOnLeftSide(mouseX, windowWidth) {
+               return mouseX < windowWidth / 2; 
+            } 
+
+            document.onmousemove = function(e) { 
+               console.log(mouseOnLeftSide(e.pageX, window.innerWidth));
+            };
+            mouseOnLeftSide(5, 499) // ensure it works with width < 500</code></pre>
+            </section>
+            
+
+<section>
+              
+              <h2>Simpler Testing and clear dependancies</h2>
+    <pre><code contenteditable class="javascript code-long">// Impure - accessing document global directly
+var getHTML = function(id) {
+    var el = document.getElementById(id);
+    return el.innerHTML;
+}
+// Pure - paas the document as dependancy - easy to mock test.
+var getHTML = function(doc, id) {
+    var el = doc.getElementById(id);
+    return el.innerHTML;
+}
+// Unit Testing 
+var stubDoc = {
+    getElementById: function(id) {
+        if (id === 'causewaycom-nav') return { innerHTML: 'Twas brillig…' };
+    }
+};
+assert.equal(getHTML(stubDoc, 'causewaycom-nav'), 'Twas brillig…');
+//=> test passes
+
+// Dependancy Injection using Pure function  from Causway UI styles
+(function (window, document, jQuery) {
+  'use strict';
+
+  jQuery('input, textarea').placeholder({classname: 'placeholder-style'});
+......
+}(window, document, jQuery));
+
+</code></pre>
+            </section>
+
+<section>
+
+           <h2> Portable / Self-Documenting</h2>
+<p>Pure functions are completely self-contained. Everything the function needs is handed to it on a silver platter. Ponder this for a moment... How might this be beneficial? For starters, a function's dependencies are explicit and therefore easier to see and understand - no funny business going on under the hood.</p>
+</section>
+<section>
+  <pre><code class="javascript code-long">//impure
+var signUp = function(attrs) {
+  var user = saveUser(attrs);
+  welcomeUser(user);
+};
+var saveUser = function(attrs) {
+    var user = Db.save(attrs);
+    ...
+};
+var welcomeUser = function(user) {
+    Email(user, ...);
+    ...
+};
+//pure
+var signUp = function(Db, Email, attrs) {
+  return function() {
+    var user = saveUser(Db, attrs);
+    welcomeUser(Email, user);
+  };
+};
+var saveUser = function(Db, attrs) {
+    ...
+};
+var welcomeUser = function(Email, user) {
+    ...
+};</code>
+</pre>
+
+<p>The example here demonstrates that the pure function must be honest about its dependencies.</p>
+</section>
+
+
+
+<section>
+
+<ul> <li>“Pure functions,” “side effects,” and “referential transparency” are terms usually associated with purely functional languages, 
+  but that doesn’t mean we can’t take the principles and apply them to our JavaScript, too.</li>
+
+  <li class="fragment"> By being mindful of these principles and applying them wisely when your code could benefit from them you’ll gain more reliable, self-documenting codebases that are easier to work with and that break less often. </li>
+<li class="fragment">If you want to reuse (or test) a functional banana, you don’t have to set up a stateful gorilla to hold the banana first.</li>
+
+</ul>
+  <p class="fragment">
+     It will take some time to get used to these ideas, but soon you’ll find yourself applying them without even thinking about it. Your fellow developers and your future self will thank you.</p>
+
+</section>
+
+          </section>
+      <section data-background="img/bgslide.png" data-background-size="95%">           
+          <section>           
+              <h2>ES6 ECMAScript2015</h2>
+              <p>This is where the magic happens</p>
+              <img src="img/Advantages-of-JavaScript-ES6-over-ES51.jpg" alt="JS">
+
+           </section>
+             <section>
+              <ul>
+                <li> Still why should I use ES6 today? 
+                  <ul>
+                    <li class="fragment">Get rid of Framewaorks and lots of libraries like:
+                              <ul><li> RequireJS -replace by Modules</li>
+                                  <li> Handlebars, Moustach etc. - replace by Templating</li>
+                                  <li> Q, Blubird, Promises lib. - replace new Promise</li>
+                                  <li> Many more to be added in the list</li>
+                                </ul>
+                   </li>
+                       
+                          <li class="fragment">What about my existing apps?
+                            <ul><li class="fragment">
+                      The good news is that your current applications will continue to work just fine. All browsers will support ES5 as well </li></ul>
+                    </li>
+                   <li class="fragment"> How do I write in a language that isn’t fully supported yet? 
+                    <ul><li class="fragment">
+Use of  transpilers. They allow you to write ES6 code and then compile it into ES5 or even ES3 compatible JavaScript to be used in older browsers. Google’s Traceur compiler and 6to5 are the most feature complete transpilers on the market today. And Babel is one easy to use transpiler.
+
+                   </li></ul> 
+                 
+
+                </li>
+               
+                    <li class="fragment">How is ES6 different? Lets see some code examples</li>
+                    
+                    
+                   
+                  </ul>
+                </li>
+              </ul>
+            </section>
+      
+
+            <section>  
+            <h4>Top 12 best ES6 features with example for a busy developers(in no particular order):
+            </h4>         
+                     <ul class="fragment"><li> Default Parameters in ES6</li>
+                     <li> Template Literals Multiline Strings</li>
+                    <li>  New Arrays technique in ES6</li>
+                     <li> Destructuring Assignment in ES6</li>
+                      <li>Enhanced Object Literals in ES6</li>
+                      <li>Fat Arrow Functions in ES6</li>
+                      <li>Promises in ES6</li>
+                     <li> Block-Scoped Constructs Let and Const</li>
+                     <li> Modules in ES6</li>
+                     <li> Classes in ES6</li>
+                     <li> Debugging</li>
+                      <li>Preformance</li>
+                    </ul>
+
+            </section>
+
+           
+            <section>           
+              <h3>Default Parameters in ES6</h3>
+                <pre><code contenteditable class="javascript">// ES5 we had to do these statements to define default parameters:
+   var link = function (height, color, url) {
+                var height = height || 50
+                var color = color || 'red'
+                var url = url || 'causeway.com'
+                          ...
+                }
+ /*They were okay until the value was 0 and because 0 is falsy
+   in JavaScript it would default to the hard-coded value instead 
+   of becoming the value itself.*/
+
+
+// In ES6, we can put the default values right in the signature of the functions:
+   var link = function(height = 50, color = 'red', url = 'causeway.com') {
+                       ...
+              }</code></pre>
+            </section> 
+<section>
+<h3>Templating and Strings in ES6</h3>
+                <pre><code contenteditable class="javascript">
+//String interpolation is a much-needed new feature that is finally available in JS.
+let name = 'Harry';
+let occupation = 'Wizard';
+ 
+ console.log(`Hi! My name is ${name}. I m a ${occupation}`);
+
+//String Method Old way and New way
+
+//old way
+var someText = 'hellokitty';
+if (someText.indexOf('kitty') != -1) {
+    return true;
+}
+// is now
+someText.includes('kitty');
+
+</code></pre>
+            </section> 
+     
+   
+          </section>
+<section data-background="img/bgslide.png" data-background-size="95%">
+  <section>
+              <h3>HTML template</h3>
+              <pre><code contenteditable class="javascript">var article = {
+  title: 'Hello Template Literals',
+  teaser: 'String interpolation is awesome. Here are some features',
+  body: 'Lots and lots of sanitized HTML',
+  tags: ['es6', 'template-literals', 'es6-in-depth']
+}
+var {title,teaser,body,tags} = article
+var html = `<article>
+  <header>
+    <h1>${title}</h1>
+  </header>
+  <section>
+    <div>${teaser}</div>
+    <div>${body}</div>
+  </section>
+  <footer>
+    <ul>
+      ${tags.map(tag => `<li>${tag}</li>`).join('\n      ')}
+    </ul>
+  </footer>
+</article>`</code></pre>
+            </section> 
+
+
+  <section>
+              <h3>HTML template output</h3>
+              <pre><code contenteditable class="html"><article>
+  <header>
+    <h1>Hello Template Literals</h1>
+  </header>
+  <section>
+    <div>String interpolation is awesome. Here are some features</div>
+    <div>Lots and lots of sanitized HTML</div>
+  </section>
+  <footer>
+    <ul>
+      <li>es6</li>
+      <li>template-literals</li>
+      <li>es6-in-depth</li>
+    </ul>
+  </footer>
+</article>
+</code></pre>
+        </section> 
+</section>
+<section data-background="img/bgslide.png" data-background-size="95%">
+<section>
+  <h3>New Array methods</h3>
+              <pre><code contenteditable class="javascript"> // old way
+var arr = [12,5,42,55,10];
+function doSomething(arr) {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] > 32) {
+            return arr[i];
+        }
+    }
+}
+// new way
+arr.find(n => n > 32);
+//example2
+[ 1, 3, 4, 2 ].find(x => x > 3) // 4
+//Array.from
+let titleElements = document.querySelectorAll('.article .title');
+let titles = Array.from(titleElements).map( t => t.textContent );
+console.log(titles);</code></pre>
+            </section> 
+
+
+            <section>
+  <h3>Destructuring Assignment</h3>
+              <pre><code contenteditable class="javascript">//ES6 gives us an alternative way to assign variables.
+let a = 12, b = 3;
+[a, b] = [b, a];
+// Swap the values inside a and b, without using extra variables.
+
+var log = req.log, // log has username and password
+  username = log.username,
+  password = log.password  ;
+
+//In ES6, we can replace the ES5 code above with these statements:
+
+var {username, password} = req.log</code></pre>
+<p>  It might take some time to get use to the destructuring assignment syntax, but it’s a sweet sugarcoating.</p>
+            </section> 
+
+
+ <section>
+  <h3>Enhanced Object Literals</h3>
+              <pre><code contenteditable class="javascript"> //Quick object initialization of objects from variables.
+// Old way ES5
+var name = "Johnny", job = "Secret Agent", from = "England";
+var person = {
+    'name': name,
+    'job': job,
+    'from': from
+};
+ 
+// New way ES6
+let name = "Johnny", job = "Secret Agent", from = "England";
+let person = {name, job, from};
+</code></pre>
+            </section>
+
+<section>
+  <h3>Fat Arrow Functions</h3>
+              <pre><code contenteditable class="javascript"> 
+// Old way ES5
+var arr = [3,5,8];
+var plusOne = arr.map(function(n){
+    return n+1;
+});
+
+// New way ES6
+let arr = [3,5,8];
+let plusOne = arr.map(n => n+1);
+ 
+</code></pre>
+            
+            </section>
+<section>
+  <h3>'this' context issue</h3>
+ 
+     <pre><code contenteditable class="javascript">function Person() {
+  // The Person() constructor defines `this` as an instance of itself.
+  this.age = 0;
+  setInterval(function growUp() {
+    // In non-strict mode, the growUp() function defines `this` 
+    // as the global object, which is different from the `this`
+    // defined by the Person() constructor.
+    this.age++;
+  }, 1000);
+}
+var p = new Person();
+</code></pre>
+</section>
+
+<section>
+  <h3>Hack in ES5 and ES3</h3>
+     <pre><code contenteditable class="javascript"> 
+function Person() {
+  var that = this;
+  that.age = 0;
+
+  setInterval(function growUp() {
+    // The callback refers to the `that` variable of which
+    // the value is the expected object.
+    that.age++;
+  }, 1000);
+}</code></pre>
+</section>
+
+
+<section>
+  <h3>ES6 version</h3>
+   <p>The value of this inside the function is not altered: it is the same as the value of this outside the function. No more var self = this to keep track of the current scope.</p>
+
+     <pre><code contenteditable class="javascript">function Person(){
+  this.age = 0;
+
+  setInterval(() => {
+    this.age++; // |this| properly refers to the person object
+  }, 1000);
+}
+var p = new Person();</code></pre>
+</section>
+
+
+
+
+
+
+
+<section>
+  <h3>Promises in ES6</h3>
+  <p>
+Promises, have been around quite a while and are defined by a spec called Promise/A+. ES6 has adopted this spec for its Promise implementation;<br>
+Other Promise libraries:  Q, Bluebird, RSVP and others that adhere to this spec.
+<br>
+Promises give us a way to handle asynchronous processing in a more synchronous fashion. They represent a value that we can handle at some point in the future. And, better than callbacks here, Promises give us guarantees about that future value, specifically:
+</p>
+</section>
+<section>
+<h3>Example : wrapper around getJSON in Promise</h3>
+
+              <pre><code contenteditable class="javascript"> 
+            var fetchJSON = function(url) {  
+  return new Promise((resolve, reject) => {
+    $.getJSON(url)
+      .done((json) => resolve(json))
+      .fail((xhr, status, err) => reject(status + err.message));
+  });
+}
+</code></pre></section>
+
+<section>
+<h3>Example : Consuming Promises with multiple call</h3>
+
+              <pre><code contenteditable class="javascript">  
+          var itemUrls = {  
+    'http://www.api.com/items/1234',
+    'http://www.api.com/items/4567'
+  },
+  itemPromises = itemUrls.map(fetchJSON);
+
+Promise.all(itemPromises)  
+  .then(function(results) {
+     // we only get here if ALL promises fulfill
+     results.forEach(function(item) {
+       // process item
+     });
+  })
+  .catch(function(err) {
+    // Will catch failure of first failed promise
+    console.log("Failed:", err);
+  });
+</code></pre>
+</section>
+
+
+<section>
+<h3>Example : Promises Race scenario</h3>
+
+              <pre><code contenteditable class="javascript">  
+         // A Promise that times out after ms milliseconds
+function delay(ms) {  
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+// Which ever Promise fulfills first is the result passed to our handler
+Promise.race([  
+  fetchJSON('http://www.api.com/profile/currentuser'),
+  delay(5000).then(() => { user: 'guest' })
+])
+.then(function(json) {
+   // this will be 'guest' if fetch takes longer than 5 sec.
+   console.log("user:", json.user);  
+})
+.catch(function(err) {
+  console.log("error:", err);
+});
+</code></pre>
+
+
+<p>Source: <a target="_blank" href="http://www.datchley.name/es6-promises/">Dave A.</a>
+</section>
+
+
+
+
+</section>
+
+<section data-background="img/bgslide.png" data-background-size="95%">
+
+
+<section>
+  <h3>Block Level Scope LET</h3>
+
+              <pre><code contenteditable class="javascript">function calculateTotalAmount (vip) {
+  var amount = 0
+  if (vip) {
+    var amount = 1
+  }
+  { // more crazy blocks!
+    var amount = 100
+    {
+      var amount = 1000
+      }
+  }  
+  return amount
+}
+console.log(calculateTotalAmount(true))
+//output 1000;
+</code></pre>
+</section>
+
+<section>
+  <h3>Block Level Scope and Let</h3>
+
+              <pre><code contenteditable class="javascript">function calculateTotalAmount (vip) {
+  var amount = 0 // probably should also be let, but you can mix var and let
+  if (vip) {
+    let amount = 1 // first amount is still 0
+  } 
+  { // more crazy blocks!
+    let amount = 100 // first amount is still 0
+    {
+      let amount = 1000 // first amount is still 0
+      }
+  }  
+  return amount
+}
+console.log(calculateTotalAmount(true))
+//output 0;</code></pre>
+</section>
+
+
+
+
+
+<section>
+  <h3>Block Level Scope and Const</h3>
+
+              <pre><code contenteditable class="javascript">    //Const turns variables into constants, and they can’t be changed.
+const pi = 3.14;
+console.log(pi);
+
+const PI = 3.141593
+PI > 3.0
+
+//Old way ES5
+//  only in ES5 through the help of object properties
+//  and only in global context and not in a block scope
+Object.defineProperty(typeof global === "object" ? global : window, "PI", {
+    value:        3.141593,
+    enumerable:   true,
+    writable:     false,
+    configurable: false
+})
+PI > 3.0;
+</code></pre>
+</section>
+
+</section>
+
+
+
+      
+        <section data-background="img/bgslide.png" data-background-size="95%">
+          <section>
+                <h2>Modules in ES6</h2>
+                <ul><li>JavaScript has had modules for a long time. 
+                <p class="fragment"> However, they were implemented via libraries, not built into the language. </p>
+              </li><li class="fragment">ES6 is the first time that JavaScript has built-in modules.</li>
+
+<li class="fragment">ES6 modules are stored in files. </li><li class="fragment">There is exactly one module per file and one file per module. </li><li class="fragment">You have two ways of exporting things from a module. </li><li class="fragment">These two ways can be mixed, but it is usually better to use them separately.<ul><li class="fragment"> Multiple named exports</li><li class="fragment">Single default export</li></ul></li></ul>
+                
+          </section>
+          <section>
+            <h4>  Multiple named exports</h4>
+             <pre><code class="javascript">//------ lib.js ------
+export const sqrt = Math.sqrt;
+export function square(x) {
+    return x * x;
+}
+export function diag(x, y) {
+    return sqrt(square(x) + square(y));
+}
+//------ main.js ------
+import { square, diag } from 'lib';
+console.log(square(11)); // 121
+console.log(diag(4, 3)); // 5
+
+//------ main.js ------ import the complete module:
+import * as lib from 'lib';
+console.log(lib.square(11)); // 121
+console.log(lib.diag(4, 3)); // 5</code></pre>
+            
+          </section>
+
+ <section>
+            <h4>  Single named exports</h4>
+             <pre><code  class="javascript">/------ myFunc.js ------
+export default function () { ··· } // no semicolon!
+
+//------ main1.js ------
+import myFunc from 'myFunc';
+myFunc();
+Or a class:
+
+//------ MyClass.js ------
+export default class { ··· } // no semicolon!
+
+//------ main2.js ------
+import MyClass from 'MyClass';
+const inst = new MyClass();
+</code></pre>
+            
+          </section>
+
+
+          <section>
+<ul><li>In Modules<ol>
+
+<li class="fragment">there may be declarations (variable declarations, function declarations, etc.).</li>
+<li class="fragment">By default, these declarations stay local to the module.</li>
+<li class="fragment">You can mark some of them as exports, then other modules can import them.</li>
+<li class="fragment">A module can import things from other modules. It refers to those modules via module specifiers, strings that are either:</li>
+<li class="fragment">Relative paths ('../model/user'): these paths are interpreted relatively to the location of the importing module. The file extension .js can usually be omitted.</li>
+<li class="fragment">Modules are singletons. Even if a module is imported multiple times, only a single “instance” of it exists.</li>
+<li class="fragment">This approach to modules avoids global variables, the only things that are global are module specifiers.</li>
+</ol></li></ul>
+</section>
+
+
+        </section>
+
+        <section data-background="img/bgslide.png" data-background-size="95%">
+          <section>
+          <h2>Future of Javascript - Stratagy for our products</h2>
+            <ul><li>JavaScript is evolving at very fast pace, as we don't have to be dependant on lot many libs</li>
+              <li>We can utilize best of coding practice to reduce bugs and scalability issues</li>
+              <li>To add more value to our products. We need to consider some of coding practice across all teams for e.g</li>
+</ul>
+        </section>
+        <section>
+
+             <ul> <li>Stablize the existing product code base by cleaning up code or removing unnecessary libraries, reduce duplicacy</li>
+
+<li class="fragment">Best of tech stack for front end javascript code base</li>
+<li class="fragment">Causeway Components to bring consistancy, reusability throughout all products </li>
+<li class="fragment">Responsive Strategies. </li>
+
+<li class="fragment">Start implementing ES6 code in product, we can start introducing ES6 in components</li>
+
+
+<li class="fragment">Peer code review in Gitlab</li>
+<li class="fragment">Your suggestions and efforts are welcome.</li>
+</ul>
+
+        </section>  
+      </section>
+
+        <section data-background="img/bgslide.png" data-background-size="95%">
+          <h2>Questions and Comments</h2>
+            
+        </section>  
+
+
+       <!-- <section data-background="img/bgslide.png" data-background-size="95%">
+          <h2>Forms</h2>
+          <live-example>
+            <script type="text/template" data-title="Forms">
+            <div ng-controller="Controller">
+              <form novalidate class="css-form">
+                Name:
+                <input type="text" ng-model="user.name" required /><br />
+                E-mail:
+                <input type="email" ng-model="user.email" required /><br />
+                <button ng-click="reset()">RESET</button>
+                <button ng-click="update(user)">SAVE</button>
+              </form>
+              <pre>form = {{user | json}}</pre>
+              <pre>master = {{master | json}}</pre>
+              </div>
+              <code>
+              function Controller($scope) {
+              $scope.master= {};
+              $scope.update = function(user) {
+              $scope.master= angular.copy(user);
+              };
+              $scope.reset = function() {
+              $scope.user = angular.copy($scope.master);
+              };
+              $scope.reset();
+              }
+              </code>
+              <style type="text/css">
+              .css-form input.ng-invalid.ng-dirty {
+              background-color: #FA787E;
+              }
+              .css-form input.ng-valid.ng-dirty {
+              background-color: #78FA89;
+              }
+              </style>
+              </script>
+          </live-example>
+        </section> -->
+        <section data-background="img/bgslide.png" data-background-size="95%">
+          <h2>THE END</h2>
+          
+          <p><a target="_blank" href="bg-gitlab.causeway.com">GitLab Source Code</a></p>
+          <p><a target="_blank" href="https://www.gitbook.com/book/drboolean/mostly-adequate-guide">Pure Function Book</a></p>
+
+          <p><a target="_blank" href="http://exploringjs.com/es6/">ES6 in Detail</a></p>
+        <p><a target="_blank"  href="https://developers.google.com/web/tools/chrome-devtools/">Debugging</a></p>
+        <p><a target="_blank" href="https://www.dannycroft.co.uk/enabling-source-maps-in-chrome/">Source Map</a></p>
+        </section>  
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script src="js/jquery-1.9.1.min.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controls: true,
+progress: true,
+history: true,
+center: true,
+backgroundTransition: 'fade',
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition:  'fade', // default/cube/page/concave/zoom/linear/fade/none
+/*  multiplex: {
+// Example values. To generate your own, see the socket.io server instructions.
+secret: '14023985217107999788', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+id: '64fdfbffbf74467c', // Obtained from socket.io server
+url: 'localhost:1948' // Location of your socket.io server
+}, */
+// Optional libraries used to extend on reveal.js
+dependencies: [
+// { src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js', async: true },
+//          { src: 'plugin/multiplex/client.js', async: true },
+{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+// { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+{ src: 'codemirror/lib/codemirror.js'},
+{ src: 'codemirror/mode/javascript/javascript.js'},
+{ src: 'codemirror/mode/css/css.js'},
+{ src: 'codemirror/mode/xml/xml.js'},
+{ src: 'codemirror/mode/htmlmixed/htmlmixed.js'},
+{ src: 'js/angular.min.js'},
+{ src: 'js/live_example.js', callback: function(){ angular.bootstrap(document, ['angularReveal']); } }
+// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+  </body>
+</html>
